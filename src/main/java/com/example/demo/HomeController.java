@@ -19,6 +19,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(Model model) {
+//        Start of input section
         Actor actor = new Actor();
         actor.setName("Sandra Bullock");
         actor.setRealname("Sandra Mae Bullowski");
@@ -30,10 +31,18 @@ public class HomeController {
 
         Set<Movie> movies = new HashSet<Movie>();
         movies.add(movie);
+//        adding a second movie
+        movie = new Movie();
+        movie.setTitle("Emoji the Sequel");
+        movie.setYear(2018);
+        movie.setDescription("The sequel emoji movie...");
 
+        movies.add(movie);
+//        setting movies to actor
         actor.setMovies(movies);
+//        saving actor/actress
         actorRepository.save(actor);
-
+//        End of input section
         model.addAttribute("actors",actorRepository.findAll());
         return "index";
     }
